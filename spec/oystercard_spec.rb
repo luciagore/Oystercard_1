@@ -15,8 +15,13 @@ describe Oystercard do
 		end
 
 		it "protects a card balance from exeeding £90" do
-			message = "Maximum balance exceeded"
+			message = "Maximum balance of #{Oystercard::MAX_BALANCE} exceeded"
 			expect { card.top_up(Oystercard::MAX_BALANCE.next) }.to raise_error message
+		end
+
+	context "#deduct"
+		it "deducts the fare from balance" do
+			expect { card.deduct(4) }.to change { card.balance }.by -4
 		end
 
 end

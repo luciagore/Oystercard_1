@@ -23,4 +23,11 @@ p oystercard.top_up(10)
 # I want a maximum limit (of £90) on my card
 
 # * Feature Test 3 *
-p oystercard.top_up(100)
+# p oystercard.top_up(100)
+
+
+# * User Story 4 *
+# In order to pay for my journey
+# As a customer
+# I need my fare deducted from my card
+p oystercard.deduct(4)
