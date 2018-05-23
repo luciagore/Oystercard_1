@@ -6,9 +6,11 @@ require './lib/oystercard.rb'
 # I want money on my card
 
 # * Feature Test 1 *
-oystercard = Oystercard.new
-oystercard.balance
+p oystercard = Oystercard.new
+p oystercard.balance
 
 
-
-#oystercard.top_up
+# In order to keep using public transport
+# As a customer
+# I want to add money to my card
+p oystercard.top_up(10)
