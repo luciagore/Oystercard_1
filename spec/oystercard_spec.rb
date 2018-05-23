@@ -21,6 +21,7 @@ describe Oystercard do
 
 	context "#deduct"
 		it "deducts the fare from balance" do
+			card.top_up(4)
 			expect { card.deduct(4) }.to change { card.balance }.by -4
 		end
 
