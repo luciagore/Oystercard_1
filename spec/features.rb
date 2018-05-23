@@ -15,7 +15,7 @@ p oystercard.balance
 # I want to add money to my card
 
 # * Feature Test 2 *
-p oystercard.top_up(10)
+# p oystercard.top_up(10)
 
 # * User Story 3 *
 # In order to protect my money from theft or loss
@@ -25,9 +25,20 @@ p oystercard.top_up(10)
 # * Feature Test 3 *
 # p oystercard.top_up(100)
 
-
 # * User Story 4 *
 # In order to pay for my journey
 # As a customer
 # I need my fare deducted from my card
-p oystercard.deduct(4)
+
+# * Feature Test 4 *
+# p oystercard.deduct(4)
+
+# * User Story 5 *
+# In order to get through the barriers.
+# As a customer
+# I need to touch in and out.
+
+# * Feature Test 5 *
+p oystercard.touch_in
+p oystercard.touch_out
+p oystercard.in_journey?

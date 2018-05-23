@@ -25,4 +25,19 @@ describe Oystercard do
 			expect { card.deduct(4) }.to change { card.balance }.by -4
 		end
 
+	context "#touch_in"
+		it "allows card to touch in at a barrier" do
+			expect(card.touch_in).to eq true
+		end
+
+	context "#touch_out"
+		it "allows card to touch out at a barrier" do
+			expect(card.touch_out).to eq true
+		end
+
+	context "#in_journey?"
+		it "tells you if the card is touched in an on route" do
+			card.touch_in
+			expect(card.in_journey?).to eq true
+		end
 end
