@@ -14,4 +14,9 @@ describe Oystercard do
 			expect { card.top_up(10) }.to change { card.balance }.by 10
 		end
 
+		it "protects a card balance from exeeding £90" do
+			message = "Maximum balance exceeded"
+			expect { card.top_up(Oystercard::MAX_BALANCE.next) }.to raise_error message
+		end
+
 end
