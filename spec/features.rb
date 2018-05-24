@@ -64,6 +64,17 @@ p oystercard = Oystercard.new
 # As a customer
 # I need to know where I've travelled from
 
-# * Feature Test 7 *
+# * Feature Test 8 *
+# oystercard.top_up(3)
+# oystercard.touch_in(entry_station)
+
+# * User Story 9 *
+# In order to know where I have been
+# As a customer
+# I want to see all my previous trips
+
+# * Feature Test 9 *
 oystercard.top_up(3)
-oystercard.touch_in(entry_station)
+oystercard.touch_in("entry_station")
+oystercard.touch_out("exit_station")
+oystercard.journeys

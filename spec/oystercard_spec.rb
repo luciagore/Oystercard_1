@@ -9,6 +9,23 @@ describe Oystercard do
 		end
 	end
 
+	context "#journeys" do
+		it "initializes the oystercard with an empty list of journeys" do
+			expect(card.journeys).to be_empty
+		end
+	end
+
+	context "#current_journey" do
+		let(:station){ double :station }
+		let(:end_station){ double :end_station }
+		it "creates one journey with entry and exit stations" do
+			card.top_up(4)
+			card.touch_in(station)
+			card.touch_out(end_station)
+			expect(card.current_journey).to include(entry_station: station, exit_station: end_station)
+		end
+	end
+
 	context "#top_up" do
 		it "allows user to add funds to the balance" do
 			expect { card.top_up(10) }.to change { card.balance }.by 10
@@ -35,27 +52,37 @@ describe Oystercard do
 			card.touch_in("Aldgate")
 			expect(card.entry_station).to eq "Aldgate"
 		end
-
+		it "allows journeys in card to store entry_station" do
+			expect(card.current_journey).to include(station)
+		end
 	end
 
 	context "#touch_out" do
 		let(:station){ double :station }
+		let(:end_station){ double :end_station }
 		it "allows card to touch out at a barrier" do
-			card.touch_out
+			card.touch_out(end_station)
 			expect(card.in_journey?).to eq false
 		end
 
 		it "deducts minimum fare from card on touch out" do
 			card.top_up(3)
 			card.touch_in(station)
-			expect { card.touch_out }.to change { card.balance }.by (-Oystercard::MIN_FARE)
+			expect { card.touch_out(end_station) }.to change { card.balance }.by (-Oystercard::MIN_FARE)
 		end
 
 		it "changes entry station to nil on touch out" do
 			card.top_up(3)
 			card.touch_in(station)
-			card.touch_out
+			card.touch_out(end_station)
 			expect(card.entry_station).to eq nil
+		end
+
+		it "stores exit station on touch out" do
+			card.top_up(3)
+			card.touch_in("Aldgate")
+			card.touch_out("Westminster")
+			expect(card.exit_station).to eq "Westminster"
 		end
 	end
 
