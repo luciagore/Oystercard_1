@@ -24,7 +24,7 @@ class Oystercard
   end
 
   def touch_out
-    @balance -= MIN_FARE
+    deduct(MIN_FARE)
     @touch_out = true
   end
 
