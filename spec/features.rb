@@ -55,6 +55,15 @@ p oystercard = Oystercard.new
 # When my journey is complete, I need the correct amount deducted from my card
 
 # * Feature Test 6 *
-p oystercard.top_up(3)
-p oystercard.touch_in
-p oystercard.touch_out
+# p oystercard.top_up(3)
+# p oystercard.touch_in
+# p oystercard.touch_out
+
+# * User Story 8 *
+# In order to pay for my journey
+# As a customer
+# I need to know where I've travelled from
+
+# * Feature Test 7 *
+oystercard.top_up(3)
+oystercard.touch_in(entry_station)
