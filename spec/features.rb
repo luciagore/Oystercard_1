@@ -7,7 +7,7 @@ require './lib/oystercard.rb'
 
 # * Feature Test 1 *
 p oystercard = Oystercard.new
-p oystercard.balance
+# p oystercard.balance
 
 # * User Story 2 *
 # In order to keep using public transport
@@ -39,6 +39,15 @@ p oystercard.balance
 # I need to touch in and out.
 
 # * Feature Test 5 *
+# p oystercard.touch_in
+# p oystercard.touch_out
+# p oystercard.in_journey?
+
+
+# * User Story 6 *
+# In order to pay for my journey
+# As a customer
+# I need to have the minimum amount (£1) for a single journey.
+
+# * Feature Test 6 *
 p oystercard.touch_in
-p oystercard.touch_out
-p oystercard.in_journey?
