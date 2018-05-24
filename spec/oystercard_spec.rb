@@ -52,8 +52,10 @@ describe Oystercard do
 			card.touch_in("Aldgate")
 			expect(card.entry_station).to eq "Aldgate"
 		end
-		it "allows journeys in card to store entry_station" do
-			expect(card.current_journey).to include(station)
+		it "allows journeys on the card to store entry station" do
+			card.top_up(3)
+			card.touch_in(station)
+			expect(card.current_journey).to include(:entry_station => station)
 		end
 	end
 
@@ -83,6 +85,13 @@ describe Oystercard do
 			card.touch_in("Aldgate")
 			card.touch_out("Westminster")
 			expect(card.exit_station).to eq "Westminster"
+		end
+
+		it "allows journeys on the card to store exit station" do
+			card.top_up(3)
+			card.touch_in(station)
+			card.touch_out(end_station)
+			expect(card.current_journey).to include(:entry_station => station, :exit_station => end_station)
 		end
 	end
 

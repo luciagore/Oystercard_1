@@ -74,7 +74,11 @@ p oystercard = Oystercard.new
 # I want to see all my previous trips
 
 # * Feature Test 9 *
-oystercard.top_up(3)
-oystercard.touch_in("entry_station")
-oystercard.touch_out("exit_station")
-oystercard.journeys
+p oystercard.top_up(3)
+p oystercard.touch_in("entry_station")
+p oystercard.touch_out("exit_station")
+p oystercard.journeys
+p oystercard.touch_in("entry_station2")
+p oystercard.touch_out("exit_station2")
+p oystercard.journeys
+p oystercard.current_journey
