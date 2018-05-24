@@ -20,13 +20,6 @@ describe Oystercard do
 		end
 	end
 
-	context "#deduct" do
-		it "deducts the fare from balance" do
-			card.top_up(4)
-			expect { card.deduct(4) }.to change { card.balance }.by -4
-		end
-	end
-
 	context "#touch_in" do
 		it "allows card to touch in at a barrier" do
 			card.top_up(3)
@@ -41,6 +34,12 @@ describe Oystercard do
 		it "allows card to touch out at a barrier" do
 			expect(card.touch_out).to eq true
 		end
+
+		it "deducts minimum fare from card on touch out" do
+			card.top_up(3)
+			card.touch_in
+			expect { card.touch_out }.to change { card.balance }.by (-Oystercard::MIN_FARE)
+		end
 	end
 
 	context "#in_journey?" do
@@ -49,5 +48,5 @@ describe Oystercard do
 			card.touch_in
 			expect(card.in_journey?).to eq true
 		end
-	end 
+	end
 end
