@@ -22,7 +22,7 @@ describe Oystercard do
 			card.top_up(4)
 			card.touch_in(station)
 			card.touch_out(end_station)
-			expect(card.current_journey).to include(entry_station: station, exit_station: end_station)
+			expect(card.journeys).to include({entry_station: station, exit_station: end_station})
 		end
 	end
 
@@ -73,13 +73,6 @@ describe Oystercard do
 			expect { card.touch_out(end_station) }.to change { card.balance }.by (-Oystercard::MIN_FARE)
 		end
 
-		it "changes entry station to nil on touch out" do
-			card.top_up(3)
-			card.touch_in(station)
-			card.touch_out(end_station)
-			expect(card.entry_station).to eq nil
-		end
-
 		it "stores exit station on touch out" do
 			card.top_up(3)
 			card.touch_in("Aldgate")
@@ -91,7 +84,7 @@ describe Oystercard do
 			card.top_up(3)
 			card.touch_in(station)
 			card.touch_out(end_station)
-			expect(card.current_journey).to include(:entry_station => station, :exit_station => end_station)
+			expect(card.journeys).to include(:entry_station => station, :exit_station => end_station)
 		end
 	end
 
