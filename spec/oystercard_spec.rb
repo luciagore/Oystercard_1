@@ -42,7 +42,7 @@ describe Oystercard do
 		it "allows card to touch in at a barrier" do
 			card.top_up(3)
 			card.touch_in(station)
-			expect(card.in_journey?).to eq true
+			expect(card.in_journey).to eq true
 		end
 		it "prevents user touching in if without miniumum fare" do
 			expect { card.touch_in(station) }.to raise_error "Insufficient funds"
@@ -50,7 +50,7 @@ describe Oystercard do
 		it "stores the entry station for a journey" do
 			card.top_up(3)
 			card.touch_in("Aldgate")
-			expect(card.entry_station).to eq "Aldgate"
+			expect(card.current_journey[:entry_station]).to eq "Aldgate"
 		end
 		it "allows journeys on the card to store entry station" do
 			card.top_up(3)
@@ -63,8 +63,10 @@ describe Oystercard do
 		let(:station){ double :station }
 		let(:end_station){ double :end_station }
 		it "allows card to touch out at a barrier" do
+			card.top_up(3)
+			card.touch_in(station)
 			card.touch_out(end_station)
-			expect(card.in_journey?).to eq false
+			expect(card.in_journey).to eq false
 		end
 
 		it "deducts minimum fare from card on touch out" do
@@ -77,7 +79,7 @@ describe Oystercard do
 			card.top_up(3)
 			card.touch_in("Aldgate")
 			card.touch_out("Westminster")
-			expect(card.exit_station).to eq "Westminster"
+			expect(card.journeys.last[:exit_station]).to eq "Westminster"
 		end
 
 		it "allows journeys on the card to store exit station" do
@@ -93,7 +95,7 @@ describe Oystercard do
 		it "tells you if the card is touched in and user is on a journey" do
 			card.top_up(3)
 			card.touch_in(station)
-			expect(card.in_journey?).to eq true
+			expect(card.in_journey).to eq true
 		end
 	end
 end
